@@ -1,0 +1,19 @@
+{
+  "name": "encore-more",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/insanity54/encore-more.git"
+  },
+  "author": "Chris Grimmett <chris@grimtech.net>",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/insanity54/encore-more/issues"
+  },
+  "homepage": "https://github.com/insanity54/encore-more#readme"
+}
