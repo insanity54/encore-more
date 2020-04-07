@@ -17,8 +17,8 @@ app.get('/deck/:deckId', function (req, res) {
   const deckId = req.params.deckId;
   ripper.getDeckImage(deckId).then((deckImage) => {
     console.log('got deckImage!?')
-    res.setHeader('Content-Type', 'image/jpeg');
-    res.send(deckImage);
+    res.setHeader('Content-Type', 'image/jpg');
+    deckImage.pipe(res);
   })
   .catch((e) => {
     res.setHeader('Content-Type', 'text/plain');

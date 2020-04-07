@@ -79,6 +79,8 @@ class Ripper {
   }
 
 
+
+
   buildDeckUrl (deckId) {
     return `${rootUrl}/api/deck/${deckId}`
   }
@@ -97,7 +99,7 @@ class Ripper {
    */
   ripDeckData (deckId) {
     let deckUrl = this.buildDeckUrl(deckId);
-    debug(`ripping deck ${deckId}`)
+    debug(`ripping deck ${deckId} (${deckUrl})`)
     return httpAgent
     .request({ url: deckUrl, responseType: 'json' })
     .then((res) => {
@@ -112,26 +114,43 @@ class Ripper {
 
   downloadCardImage (cardImageUrl) {
     console.log(`downloading ${cardImageUrl}`)
-    return httpAgent
-    .request({ url: cardImageUrl, responseType: 'stream' })
-    .then((res) => {
-      let imagePath = this.buildCardImagePath(cardImageUrl);
-      debug(`writing image to ${imagePath}`);
-      return fsp.mkdir(path.dirname(imagePath), { recursive: true }).then(() => {
-        res.data.pipe(fs.createWriteStream(imagePath));
-        return imagePath;
+    let imagePath = this.buildCardImagePath(cardImageUrl);
+    let requestPromise = httpAgent
+      .request({ url: cardImageUrl, responseType: 'stream' })
+    let folderPromise = fsp.mkdir(path.dirname(imagePath), { recursive: true })
+    return new Promise.all([folderPromise, requestPromise]).then((res) => {
+      return new Promise((resolve, reject) => {
+        res[1].data.on('end', function() {
+          console.log('download stream ended');
+          resolve(imagePath);
+        });
+        res[1].data.on('error', function (e) {
+          reject(e)
+        })
+        res[1].data.pipe(fs.createWriteStream(imagePath));
       })
-    })
-    .catch((e) => {
-      console.error(e);
     })
   }
 
   getDeckImage (deckId) {
-    let cardImages = this.ripDeckData(deckId);
-    return new Promise.map(cardImages, this.downloadCardImage.bind(this)).then((imagePaths) => {
-      console.log(imagePaths);
-      return img.createCardMosaic(imagePaths)
+    return this.ripDeckData(deckId).then((cardImages) => {
+      console.log('got card images')
+
+      return new Promise.map(cardImages, this.downloadCardImage.bind(this), { concurrency: 3 }).then((imagePaths) => {
+        console.log(`downloading ${imagePaths.length} card images complete.`);
+        return new Promise((resolve, reject) => {
+          console.log('lets try');
+          // setTimeout(() => {
+            try {
+              console.log('lets try to get an image strim');
+              let imageStream = img.createCardMosaic(imagePaths)
+              resolve(imageStream);
+            } catch (e) {
+              reject(e);
+            }
+          // }, 5000);
+        })
+      })
     })
   }
 
