@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app",
+    "dev": "DEBUG=\"encore-more gm node\" npx supervisor -w ./src src/app",
+    "preinstall": ""
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,16 @@
   "bugs": {
     "url": "https://github.com/insanity54/encore-more/issues"
   },
-  "homepage": "https://github.com/insanity54/encore-more#readme"
+  "homepage": "https://github.com/insanity54/encore-more#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bluebird": "^3.7.2",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "gm": "^1.23.1",
+    "ssl-root-cas": "^1.3.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0"
+  }
 }

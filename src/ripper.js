@@ -131,8 +131,7 @@ class Ripper {
     let cardImages = this.ripDeckData(deckId);
     return new Promise.map(cardImages, this.downloadCardImage.bind(this)).then((imagePaths) => {
       console.log(imagePaths);
-      // return img.createCardMosaic(images)
-      return imagePaths;
+      return img.createCardMosaic(imagePaths)
     })
   }
 
