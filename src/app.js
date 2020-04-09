@@ -8,6 +8,9 @@ const { testImagePaths } = require('../fixtures/fixtures');
 const Image = require('./image');
 const img = new Image();
 const path = require('path');
+var sslRootCAs = require('ssl-root-cas')
+  .addFile(path.join(__dirname, 'www-encoredecks-com-chain.pem'));
+
 
 app.get('/', function (req, res) {
   res.send('welcome');

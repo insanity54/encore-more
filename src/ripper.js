@@ -15,8 +15,6 @@ const fsp = require('fs').promises;
 const path = require('path');
 const Image = require('./image');
 const img = new Image();
-var sslRootCAs = require('ssl-root-cas/latest')
-  .addFile(path.join(__dirname, 'www-encoredecks-com-chain.pem'));
 
 
 // constants
