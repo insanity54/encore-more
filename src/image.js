@@ -39,7 +39,7 @@ class Image {
     let cardIndex=0;
     for (var row=0; row<5; row++) {
       for (var col=0; col<10; col++) {
-        console.log(`col:${col}, row:${row}, cardIndex:${cardIndex}, x:${col*this.cardWidth}, y:${row*this.cardHeight}`)
+        debug(`col:${col}, row:${row}, cardIndex:${cardIndex}, x:${col*this.cardWidth}, y:${row*this.cardHeight}`)
         // q.in('-bordercolor', this.randomColor())
         // q.in('-border', `3x3`)
         // q.in('-geometry', `${this.cardWidth}x${this.cardHeight}+3+3^`)
@@ -55,7 +55,7 @@ class Image {
       }
     }
 
-    console.log(q);
+    debug(q);
 
     return q
       // .scale(409, 409)

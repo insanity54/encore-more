@@ -113,7 +113,7 @@ class Ripper {
 
 
   downloadCardImage (cardImageUrl) {
-    console.log(`downloading ${cardImageUrl}`)
+    debug(`downloading ${cardImageUrl}`)
     let imagePath = this.buildCardImagePath(cardImageUrl);
     let requestPromise = httpAgent
       .request({ url: cardImageUrl, responseType: 'stream' })
@@ -121,7 +121,7 @@ class Ripper {
     return new Promise.all([folderPromise, requestPromise]).then((res) => {
       return new Promise((resolve, reject) => {
         res[1].data.on('end', function() {
-          console.log('download stream ended');
+          debug('download stream ended');
           resolve(imagePath);
         });
         res[1].data.on('error', function (e) {
@@ -142,7 +142,7 @@ class Ripper {
           console.log('lets try');
           // setTimeout(() => {
             try {
-              console.log('lets try to get an image strim');
+              debug('lets try to get an image strim');
               let imageStream = img.createCardMosaic(imagePaths)
               resolve(imageStream);
             } catch (e) {
@@ -313,10 +313,10 @@ class Ripper {
     } else if (this.incremental && typeof cardImageUrl !== 'undefined') {
       return this.isLocalCard(cardImageUrl).then((isLocal) => {
         if (isLocal) {
-          console.log(`${cardImageUrl} is local.`);
+          debug(`${cardImageUrl} is local.`);
           throw new Error('EEXIST');
         } else {
-          console.log(`${cardImageUrl} is NOT local.`);
+          debug(`${cardImageUrl} is NOT local.`);
           return this.ripCardData(cardUrl, undefined);
         }
       })
@@ -346,7 +346,7 @@ class Ripper {
           /** Data that I think is good which isn't explicitly in the page */
           data.image = $('.Images_card > img:nth-child(1)').attr('src');
           data.image = `${rootUrl}${data.image}`;
-          console.log(data.image);
+          debug(data.image);
           data.url = this.normalizeUrl(cardUrl);
           data.setAbbr = setAbbrRegex.exec(data.image)[1];
           let { num, release, id } = this.parseCardId(data.image);
