@@ -1,9 +1,12 @@
 const gm = require('gm');
 const debug = require('debug')('encore-more');
+const child_process = require('child_process');
 // const Promise = require('bluebird');
 // Promise.promisifyAll(gm.prototype);
 
 // 10 card images wide, 5 card images tall.
+child_process.spawn('gm', ['version'], { stdio: 'inherit' }); // prove gm is installed & operational
+
 
 class Image {
   constructor (options) {
