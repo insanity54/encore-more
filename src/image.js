@@ -1,4 +1,5 @@
 const gm = require('gm');
+const debug = require('debug')('encore-more');
 // const Promise = require('bluebird');
 // Promise.promisifyAll(gm.prototype);
 
