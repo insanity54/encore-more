@@ -14,16 +14,29 @@ const fs = require('fs');
 const fsp = require('fs').promises;
 const path = require('path');
 const Image = require('./image');
+const { setupCache } = require('axios-cache-adapter');
+const { cacheAdapterEnhancer } = require('axios-extensions');
 const img = new Image();
+const cacheConfig = {
+  enabledByDefault: true,
+  cacheFlag: 'fromCache'
+}
+// const cache = setupCache({
+//   maxAge: 15 * 60 * 1000,
+//   debug: true,
+//   clearOnError: false,
+//   readHeaders: false
+// });
 
 
 // constants
-const customHeaders = { 'User-Agent': `encore-more`, 'Cache-Control': 'no-cache' };
+const customHeaders = { 'User-Agent': `encore-more <chris@grimtech.net>` };
 const rootUrl = 'https://www.encoredecks.com';
 const httpAgent = axios.create({
   method: 'get',
   baseURL: rootUrl,
-  headers: customHeaders
+  headers: customHeaders,
+  adapter: cacheAdapterEnhancer(axios.defaults.adapter, cacheConfig)
 });
 
 
@@ -119,7 +132,8 @@ class Ripper {
     return new Promise.all([folderPromise, requestPromise]).then((res) => {
       return new Promise((resolve, reject) => {
         res[1].data.on('end', function() {
-          debug('download stream ended');
+          let fromCache = (res[1].request.fromCache === true);
+          debug(`download stream ended. fromCache?:${fromCache}`);
           resolve(imagePath);
         });
         res[1].data.on('error', function (e) {
@@ -134,7 +148,7 @@ class Ripper {
     return this.ripDeckData(deckId).then((cardImages) => {
       console.log('got card images')
 
-      return new Promise.map(cardImages, this.downloadCardImage.bind(this), { concurrency: 3 }).then((imagePaths) => {
+      return new Promise.map(cardImages, this.downloadCardImage.bind(this)).then((imagePaths) => {
         console.log(`downloading ${imagePaths.length} card images complete.`);
         return new Promise((resolve, reject) => {
           console.log('lets try');

@@ -1,0 +1,2 @@
+web: sleep 3; npx supervisor -w ./src src/app
+cache: docker run -i --name="encore-more.redis" --rm -p 6389:6379 redis

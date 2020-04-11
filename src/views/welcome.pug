@@ -1,44 +1,55 @@
 doctype html
 head
   title ED2TTS
-  // link(href='https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css' rel='stylesheet')
-  // script(src='https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js')
-h1 Encoredecks.com deck exporter for Tabletop Simulator
-#container.col
-  h2 About
-  p
-    | This is a website which helps you create Tabletop Simulator Weiss Schwarz card decks using pre-made decks found on 
-    a(href='https://encoredecks.com/') encoredecks.com
-    | .
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh' crossorigin='anonymous')
+body
+  .navbar.bg-dark.navbar-expand-lg.navbar-dark
+    a.navbar-brand(target="_blank" href="/") EncoreDecks to Tabletop Simulator (ED2TTS)
+  .container
+    .col-xl-12.py-md-3.pl-md-5.bd-content
+      .jumbotron
+        .col-md-12
+          h1 Export your EncoreDecks to TTS
+          p.lead ED2TTS creates a jpg of your deck in a format that is suitable for importing into Tabletop Simulator.
+          img.img-fluid(src="/deck/ZT1ZXFQkp" alt="An example image created by ED2TTS. The image consists of 50 Weiss Schwarz cards arranged side by side in a 10x5 mosaic.")
+      
+      h2 
+        span.bd-content-title Usage
+      p
+        | To get started, choose a deck on 
+        a(target="_blank" href='//encoredecks.com/') encoredecks.com
+        |  that you would like to import into Tabletop Simulator.
 
-  p
-    | To get started, find a deck on 
-    a(href='https://encoredecks.com/') encoredecks.com
-    |  that you would like to import into Tabletop Simulator.
-
-  p
-    | For example, we will use 
-    a(href="https://www.encoredecks.com/deck/ZT1ZXFQkp") My First Miku Deck
-    | . In this case, the URL is https://www.encoredecks.com/deck/ZT1ZXFQkp. From the URL we can see that the  
-    strong Encoredecks Deck ID
-    |  is ZT1ZXFQkp. 
-    
-    
-  p
-    | Simply copy the 
-    strong Encoredecks Deck ID
-    |  into this website, and this website will generate a deck image which is suitable for importing into Tabletop Simulator.
-    
-  h2 Example
-  
-  p
-    | https://www.encoredecks.com/deck/ZT1ZXFQkp becomes 
-    a(href=`//${domain}/deck/ZT1ZXFQkp`) #{domain}/deck/ZT1ZXFQkp
+      p
+        | For example, we will use 
+        a(target="_blank" href="https://www.encoredecks.com/deck/ZT1ZXFQkp") My First Miku Deck
+        | . In this case, the URL is https://www.encoredecks.com/deck/ZT1ZXFQkp. From the URL we can see that the 
+        | Encoredecks Deck ID is #[strong ZT1ZXFQkp]. 
+        
+        
+      p
+        | Simply copy & paste the Encoredecks Deck ID below, and this website will generate a deck image which is suitable for importing into Tabletop Simulator.
+        
+      h2 
+        span.bd-content-title Example
+      
+      p
+        | https://www.encoredecks.com/deck/ZT1ZXFQkp becomes 
+        a(target="_blank" href=`//${domain}/deck/ZT1ZXFQkp`) #{domain}/deck/ZT1ZXFQkp
+        | . This URL can be pasted directly into the custom deck creation menu in Tabletop Simulator.
 
 
-  h2 Future Improvements
-  ul
-    li hi-res card images.
-    
-  h2 Author
-  p Chris Grimmett #[a(href="mailto:chris@grimtech.net") chris@grimtech.net]
+      h2 
+        span.bd-content-title Future Improvements
+      ul
+        li hi-res card images.
+        
+      h2 
+        span.bd-content-title Author
+      p Chris Grimmett #[a(href="mailto:chris@grimtech.net") chris@grimtech.net]
+
+  script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js' integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n' crossorigin='anonymous')
+  script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous')
+  script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js' integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6' crossorigin='anonymous')
