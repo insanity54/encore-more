@@ -11,9 +11,13 @@ const path = require('path');
 var sslRootCAs = require('ssl-root-cas')
   .addFile(path.join(__dirname, 'www-encoredecks-com-chain.pem'));
 
+app.engine('pug', require('pug').__express);
+app.set('view engine', 'pug')
+app.set('views', path.join(__dirname, 'views'))
 
 app.get('/', function (req, res) {
-  res.send('welcome');
+  let d = req.headers.host;
+  res.render('welcome', { domain: d });
 })
 
 app.get('/deck/:deckId', function (req, res) {

@@ -44,15 +44,11 @@ class Image {
     for (var row=0; row<5; row++) {
       for (var col=0; col<10; col++) {
         debug(`col:${col}, row:${row}, cardIndex:${cardIndex}, x:${col*this.cardWidth}, y:${row*this.cardHeight}`)
-        // q.in('-bordercolor', this.randomColor())
-        // q.in('-border', `3x3`)
-        // q.in('-geometry', `${this.cardWidth}x${this.cardHeight}+3+3^`)
         q.in('-gravity', 'Center')
         q.in('-page', `+${col*this.cardWidth}+${row*this.cardHeight}`)
-        // q.in('-fill', 'red')
-        q.in('-fill', 'white')
-        q.in('-stroke', 'black')
-        q.in('-draw', `text 0,0 i${cardIndex}`)
+        // q.in('-fill', 'white')
+        // q.in('-stroke', 'black')
+        // q.in('-draw', `text 0,0 i${cardIndex}`)
         q.in(imagePaths[cardIndex])
         q.in('-rotate', '+90>')
         cardIndex++;
