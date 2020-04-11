@@ -26,7 +26,6 @@ const connectToRedisAndServe = () => {
   app.engine('pug', require('pug').__express);
   app.use(favicon(path.join(__dirname, '..', 'data', 'favicon.ico')));
   app.use(express.static('data'));
-  // app.use(cache('1 day'));
   app.set('view engine', 'pug')
   app.set('views', path.join(__dirname, 'views'))
 
