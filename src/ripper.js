@@ -21,12 +21,7 @@ const cacheConfig = {
   enabledByDefault: true,
   cacheFlag: 'fromCache'
 }
-// const cache = setupCache({
-//   maxAge: 15 * 60 * 1000,
-//   debug: true,
-//   clearOnError: false,
-//   readHeaders: false
-// });
+
 
 
 // constants
